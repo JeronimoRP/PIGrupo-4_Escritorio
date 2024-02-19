@@ -88,26 +88,30 @@
     <Compile Include="Formularios\Info_Incidencia.Designer.cs">
       <DependentUpon>Info_Incidencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\Modificar_Incidencias_Ajenas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Modificar_Incidencias_Ajenas.Designer.cs">
+      <DependentUpon>Modificar_Incidencias_Ajenas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Modificar_Incidencias_Propias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Modificar_Incidencias_Propias.Designer.cs">
+      <DependentUpon>Modificar_Incidencias_Propias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\Profesor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Profesor.Designer.cs">
       <DependentUpon>Profesor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaDeClases\Lista_Incidencias_Subtipo.cs" />
     <Compile Include="Modelos\Aula.cs" />
     <Compile Include="Modelos\Comentario.cs" />
     <Compile Include="Modelos\Departamento.cs" />
     <Compile Include="Modelos\Equipo.cs" />
     <Compile Include="Modelos\Incidencias.cs" />
     <Compile Include="Modelos\Incidencias_subtipo.cs" />
-    <Compile Include="ListaDeClases\Lista_Aulas.cs" />
-    <Compile Include="ListaDeClases\Lista_Comentario.cs" />
-    <Compile Include="ListaDeClases\Lista_Departamento.cs" />
-    <Compile Include="ListaDeClases\Lista_Equipo.cs" />
-    <Compile Include="ListaDeClases\Lista_Incidencias.cs" />
-    <Compile Include="ListaDeClases\Lista_Perfiles.cs" />
-    <Compile Include="ListaDeClases\Lista_Personal.cs" />
     <Compile Include="Modelos\Perfiles.cs" />
     <Compile Include="Modelos\Personal.cs" />
     <Compile Include="Program.cs" />
@@ -118,11 +122,20 @@
     <EmbeddedResource Include="Formularios\Cargando.resx">
       <DependentUpon>Cargando.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Creacion_de_Incidencias.resx">
+      <DependentUpon>Creacion_de_Incidencias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Info_Incidencia.resx">
       <DependentUpon>Info_Incidencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Modificar_Incidencias_Ajenas.resx">
+      <DependentUpon>Modificar_Incidencias_Ajenas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Modificar_Incidencias_Propias.resx">
+      <DependentUpon>Modificar_Incidencias_Propias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Profesor.resx">
       <DependentUpon>Profesor.cs</DependentUpon>

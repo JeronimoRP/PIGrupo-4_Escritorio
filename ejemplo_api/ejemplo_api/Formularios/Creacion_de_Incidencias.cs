@@ -16,5 +16,10 @@ namespace ejemplo_api.Formularios
         {
             InitializeComponent();
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

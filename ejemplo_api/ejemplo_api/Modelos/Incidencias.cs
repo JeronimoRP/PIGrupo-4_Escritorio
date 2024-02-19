@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ejemplo_api.Modelos
 {
@@ -27,15 +23,16 @@ namespace ejemplo_api.Modelos
     {
         public int num { get; set; }
         public Tipo tipoIncidencia { get; set; }
-        public int subtipo_id { get; set; }
+        public Incidencias_subtipo subtipo_id { get; set; }
         public DateTime fecha_creacion { get; set; }
         public DateTime fecha_cierre { get; set; }
         public string descripcion { get; set; }
         public Estado tipoEstado { get; set; }
         public string adjunto_ul { get; set; }
-        public int creador_id { get; set; }
-        public int responsable_id { get; set; }
-        public int equipo_id { get; set; }
+        public Personal personal1 { get; set; }
+        public Personal personal2 { get; set; }
+        public Equipo equipo_id { get; set; }
+        public DateTime tiempo_dec { get; set; }
 
     }
 }

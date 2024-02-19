@@ -1,7 +1,8 @@
-﻿using ejemplo_api.ListaDeClases;
+﻿
 using ejemplo_api.Modelos;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -15,18 +16,18 @@ namespace ejemplo_api.Controles
         {
             cliente = new HttpClient();
         }
-        public async Task<Lista_Personal> GetAllPersonal()
+        public async Task<List<Personal>> GetAllPersonal()
         {
             try
             {
-                Lista_Personal lista_Personal = new Lista_Personal();
+                List<Personal> lista_Personal = new List<Personal>();
                 HttpResponseMessage response = await
-                    cliente.GetAsync("https://rickandmortyapi.com/api/character/");
+                    cliente.GetAsync("http://localhost:8080/a/personals");
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();
 
-                lista_Personal = JsonConvert.DeserializeObject<Lista_Personal>(responseJson);
+                lista_Personal = JsonConvert.DeserializeObject<List<Personal>>(responseJson);
                 return lista_Personal;
             }
             catch (Exception)
@@ -40,7 +41,7 @@ namespace ejemplo_api.Controles
             {
                 Personal Personal = new Personal();
                 HttpResponseMessage response = await
-                    cliente.GetAsync("http://localhost:8080/perfile/" + id);
+                    cliente.GetAsync("http://localhost:8080/a/" + id);
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();

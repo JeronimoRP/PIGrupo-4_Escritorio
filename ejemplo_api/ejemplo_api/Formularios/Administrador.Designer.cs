@@ -34,18 +34,28 @@ namespace ejemplo_api.Formularios
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtp1 = new System.Windows.Forms.DateTimePicker();
+            this.dtp2 = new System.Windows.Forms.DateTimePicker();
             this.cbbTipo = new System.Windows.Forms.ComboBox();
             this.cbbSubtipo = new System.Windows.Forms.ComboBox();
             this.cbbEstado = new System.Windows.Forms.ComboBox();
             this.dvgIncidencias = new System.Windows.Forms.DataGridView();
+            this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Creador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Responsable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo_de_incidencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_de_creación = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_de_cierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnCrear = new System.Windows.Forms.Button();
+            this.btnBorrar = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btnMisIncidencias = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvgIncidencias)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,21 +104,23 @@ namespace ejemplo_api.Formularios
             this.label5.TabIndex = 4;
             this.label5.Text = "FECHA";
             // 
-            // dateTimePicker1
+            // dtp1
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(558, 44);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(79, 20);
-            this.dateTimePicker1.TabIndex = 5;
+            this.dtp1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtp1.Location = new System.Drawing.Point(558, 44);
+            this.dtp1.Name = "dtp1";
+            this.dtp1.Size = new System.Drawing.Size(79, 20);
+            this.dtp1.TabIndex = 5;
+            this.dtp1.Value = new System.DateTime(2024, 2, 15, 20, 15, 39, 0);
             // 
-            // dateTimePicker2
+            // dtp2
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(677, 44);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(81, 20);
-            this.dateTimePicker2.TabIndex = 6;
+            this.dtp2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtp2.Location = new System.Drawing.Point(677, 44);
+            this.dtp2.Name = "dtp2";
+            this.dtp2.Size = new System.Drawing.Size(81, 20);
+            this.dtp2.TabIndex = 6;
+            this.dtp2.Value = new System.DateTime(2024, 2, 15, 20, 15, 45, 0);
             // 
             // cbbTipo
             // 
@@ -117,6 +129,8 @@ namespace ejemplo_api.Formularios
             this.cbbTipo.Name = "cbbTipo";
             this.cbbTipo.Size = new System.Drawing.Size(121, 21);
             this.cbbTipo.TabIndex = 7;
+            this.cbbTipo.SelectedIndexChanged += new System.EventHandler(this.cambioFiltrado);
+            this.cbbTipo.SelectedValueChanged += new System.EventHandler(this.cbbTipo_SelectedValueChanged);
             // 
             // cbbSubtipo
             // 
@@ -125,6 +139,7 @@ namespace ejemplo_api.Formularios
             this.cbbSubtipo.Name = "cbbSubtipo";
             this.cbbSubtipo.Size = new System.Drawing.Size(121, 21);
             this.cbbSubtipo.TabIndex = 8;
+            this.cbbSubtipo.SelectedIndexChanged += new System.EventHandler(this.cambioFiltrado);
             // 
             // cbbEstado
             // 
@@ -133,25 +148,34 @@ namespace ejemplo_api.Formularios
             this.cbbEstado.Name = "cbbEstado";
             this.cbbEstado.Size = new System.Drawing.Size(121, 21);
             this.cbbEstado.TabIndex = 9;
+            this.cbbEstado.SelectedIndexChanged += new System.EventHandler(this.cambioFiltrado);
             // 
             // dvgIncidencias
             // 
             this.dvgIncidencias.AllowUserToAddRows = false;
             this.dvgIncidencias.AllowUserToDeleteRows = false;
+            this.dvgIncidencias.AllowUserToResizeColumns = false;
             this.dvgIncidencias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dvgIncidencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgIncidencias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Numero,
             this.Creador,
             this.Responsable,
             this.Tipo_de_incidencia,
             this.Estado,
             this.Fecha_de_creación,
             this.Fecha_de_cierre});
-            this.dvgIncidencias.Location = new System.Drawing.Point(12, 71);
+            this.dvgIncidencias.Location = new System.Drawing.Point(12, 70);
             this.dvgIncidencias.Name = "dvgIncidencias";
             this.dvgIncidencias.ReadOnly = true;
-            this.dvgIncidencias.Size = new System.Drawing.Size(776, 334);
+            this.dvgIncidencias.Size = new System.Drawing.Size(776, 337);
             this.dvgIncidencias.TabIndex = 10;
+            // 
+            // Numero
+            // 
+            this.Numero.HeaderText = "Numero";
+            this.Numero.Name = "Numero";
+            this.Numero.ReadOnly = true;
             // 
             // Creador
             // 
@@ -189,17 +213,112 @@ namespace ejemplo_api.Formularios
             this.Fecha_de_cierre.Name = "Fecha_de_cierre";
             this.Fecha_de_cierre.ReadOnly = true;
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(24, 41);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 11;
+            this.btnReset.Text = "RESET";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(232, 442);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(145, 23);
+            this.btnModificar.TabIndex = 12;
+            this.btnModificar.Text = "MODIFICAR";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnCrear
+            // 
+            this.btnCrear.Location = new System.Drawing.Point(232, 413);
+            this.btnCrear.Name = "btnCrear";
+            this.btnCrear.Size = new System.Drawing.Size(145, 23);
+            this.btnCrear.TabIndex = 13;
+            this.btnCrear.Text = "CREAR";
+            this.btnCrear.UseVisualStyleBackColor = true;
+            // 
+            // btnBorrar
+            // 
+            this.btnBorrar.Location = new System.Drawing.Point(633, 442);
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Size = new System.Drawing.Size(145, 23);
+            this.btnBorrar.TabIndex = 15;
+            this.btnBorrar.Text = "BORRAR";
+            this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(24, 442);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(145, 23);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "MENSAJES";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(24, 413);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(145, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "INFORMES";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(426, 413);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(145, 23);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "INFORMACION";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.btnInformacion_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(426, 442);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(145, 23);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "AYUDA";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // btnMisIncidencias
+            // 
+            this.btnMisIncidencias.Location = new System.Drawing.Point(633, 413);
+            this.btnMisIncidencias.Name = "btnMisIncidencias";
+            this.btnMisIncidencias.Size = new System.Drawing.Size(145, 23);
+            this.btnMisIncidencias.TabIndex = 21;
+            this.btnMisIncidencias.Text = "MIS INCIDENCIAS";
+            this.btnMisIncidencias.UseVisualStyleBackColor = true;
+            this.btnMisIncidencias.Click += new System.EventHandler(this.btnMisIncidencias_Click);
+            // 
             // Administrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 481);
+            this.Controls.Add(this.btnMisIncidencias);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnBorrar);
+            this.Controls.Add(this.btnCrear);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.dvgIncidencias);
             this.Controls.Add(this.cbbEstado);
             this.Controls.Add(this.cbbSubtipo);
             this.Controls.Add(this.cbbTipo);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtp2);
+            this.Controls.Add(this.dtp1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -221,17 +340,27 @@ namespace ejemplo_api.Formularios
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtp1;
+        private System.Windows.Forms.DateTimePicker dtp2;
         private System.Windows.Forms.ComboBox cbbTipo;
         private System.Windows.Forms.ComboBox cbbSubtipo;
         private System.Windows.Forms.ComboBox cbbEstado;
         private System.Windows.Forms.DataGridView dvgIncidencias;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnCrear;
+        private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Creador;
         private System.Windows.Forms.DataGridViewTextBoxColumn Responsable;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_de_incidencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_de_creación;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_de_cierre;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnMisIncidencias;
     }
 }

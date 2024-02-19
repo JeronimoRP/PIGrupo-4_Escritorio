@@ -1,9 +1,9 @@
 ﻿
 using ejemplo_api.Controles;
 using ejemplo_api.Formularios;
-using ejemplo_api.ListaDeClases;
 using ejemplo_api.Modelos;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ejemplo_api
@@ -11,7 +11,7 @@ namespace ejemplo_api
     internal static class Program
     {
         static Controlador_Perfiles control;
-        static Lista_Perfiles listaPerfiles;
+        static List<Perfiles> listaPerfiles;
         static Perfiles perfiles;
         /// <summary>
         ///  The main entry point for the application.
@@ -21,28 +21,30 @@ namespace ejemplo_api
         {
             control = new Controlador_Perfiles();
             perfiles = new Perfiles();
-            listaPerfiles = new Lista_Perfiles();
-            perfil();
-
+            listaPerfiles = new List<Perfiles>();
+            //perfil();
+            /*
             if (perfiles == null)
             {
                 MessageBox.Show("No posees las credenciales necesaria para poder utilizar la aplicacion");
             }
             else if (profAdmniONo()==true)
             {
+            */
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Administrador());
 
-            }
+            /*}
             else if (profAdmniONo() == false)
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                // Application.Run(new Profesor());
             }
+            */
         }
-
+        
         private static async void perfil()
         {
             Perfiles p = await control.GetPerfil(recogerCredencialesporDominio());
@@ -52,7 +54,7 @@ namespace ejemplo_api
             perfiles.password = p.password;
             perfiles.tipoPerfil = p.tipoPerfil;
         }
-
+        
         private static bool profAdmniONo()
         {
             bool profesor = false;

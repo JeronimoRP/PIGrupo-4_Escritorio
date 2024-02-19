@@ -1,4 +1,4 @@
-﻿using ejemplo_api.ListaDeClases;
+﻿
 using ejemplo_api.Modelos;
 using Newtonsoft.Json;
 using System;
@@ -23,7 +23,7 @@ namespace ejemplo_api.Controles
             {
                 List<Perfiles> personajes = new List<Perfiles>();
                 HttpResponseMessage response = await
-                    cliente.GetAsync("https://rickandmortyapi.com/api/character/");
+                    cliente.GetAsync("http://localhost:8080/perfile");
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();
