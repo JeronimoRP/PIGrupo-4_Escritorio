@@ -30,7 +30,7 @@ namespace ejemplo_api.Formularios
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtEstado = new System.Windows.Forms.TextBox();
+            this.txtsubtipo = new System.Windows.Forms.TextBox();
             this.cbbEstado = new System.Windows.Forms.ComboBox();
             this.btnComentar = new System.Windows.Forms.Button();
             this.btnResolver = new System.Windows.Forms.Button();
@@ -67,13 +67,13 @@ namespace ejemplo_api.Formularios
             this.textBox1.Size = new System.Drawing.Size(195, 20);
             this.textBox1.TabIndex = 61;
             // 
-            // txtEstado
+            // txtsubtipo
             // 
-            this.txtEstado.Location = new System.Drawing.Point(131, 131);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.ReadOnly = true;
-            this.txtEstado.Size = new System.Drawing.Size(195, 20);
-            this.txtEstado.TabIndex = 60;
+            this.txtsubtipo.Location = new System.Drawing.Point(131, 131);
+            this.txtsubtipo.Name = "txtsubtipo";
+            this.txtsubtipo.ReadOnly = true;
+            this.txtsubtipo.Size = new System.Drawing.Size(195, 20);
+            this.txtsubtipo.TabIndex = 60;
             // 
             // cbbEstado
             // 
@@ -307,7 +307,7 @@ namespace ejemplo_api.Formularios
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 450);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.txtEstado);
+            this.Controls.Add(this.txtsubtipo);
             this.Controls.Add(this.cbbEstado);
             this.Controls.Add(this.btnComentar);
             this.Controls.Add(this.btnResolver);
@@ -345,7 +345,7 @@ namespace ejemplo_api.Formularios
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox txtEstado;
+        private System.Windows.Forms.TextBox txtsubtipo;
         private System.Windows.Forms.ComboBox cbbEstado;
         private System.Windows.Forms.Button btnComentar;
         private System.Windows.Forms.Button btnResolver;

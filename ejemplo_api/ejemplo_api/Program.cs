@@ -2,6 +2,7 @@
 using ejemplo_api.Controles;
 using ejemplo_api.Formularios;
 using ejemplo_api.Modelos;
+using Proyecto.Vistas;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,33 +23,33 @@ namespace ejemplo_api
             control = new Controlador_Perfiles();
             perfiles = new Perfiles();
             listaPerfiles = new List<Perfiles>();
-            //perfil();
-            /*
+            perfil();
+            
             if (perfiles == null)
             {
                 MessageBox.Show("No posees las credenciales necesaria para poder utilizar la aplicacion");
             }
             else if (profAdmniONo()==true)
             {
-            */
+            
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Administrador());
 
-            /*}
+            }
             else if (profAdmniONo() == false)
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-               // Application.Run(new Profesor());
+                Application.Run(new Profesor());
             }
-            */
+            
         }
         
         private static async void perfil()
         {
             Perfiles p = await control.GetPerfil(recogerCredencialesporDominio());
-            perfiles.personal_id = p.personal_id;
+            perfiles.personalId = p.personalId;
             perfiles.dominio = p.dominio;
             perfiles.educantabria = p.educantabria;
             perfiles.password = p.password;

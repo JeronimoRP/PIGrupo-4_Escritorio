@@ -8,7 +8,7 @@ namespace ejemplo_api.Modelos
 {
     public class Perfiles
     {
-        public int personal_id { get; set; }
+        public int personalId { get; set; }
         public string dominio { get; set; }
         public string educantabria { get; set; }
         public string password { get; set; }

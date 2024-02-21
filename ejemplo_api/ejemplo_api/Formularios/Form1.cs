@@ -28,7 +28,7 @@ namespace ejemplo_api
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dvgPersonajes);
-                row.Cells[0].Value = personaje.personal_id;
+                row.Cells[0].Value = personaje.personalId;
                 row.Cells[1].Value = personaje.dominio;
                 row.Cells[2].Value = personaje.educantabria;
                 row.Cells[3].Value = personaje.password;

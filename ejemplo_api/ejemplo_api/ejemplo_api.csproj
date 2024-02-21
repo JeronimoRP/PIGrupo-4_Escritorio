@@ -70,11 +70,11 @@
     <Compile Include="Formularios\Cargando.Designer.cs">
       <DependentUpon>Cargando.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\Creacion_de_Incidencias.cs">
+    <Compile Include="Formularios\CreacionIncidencias.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\Creacion_de_Incidencias.Designer.cs">
-      <DependentUpon>Creacion_de_Incidencias.cs</DependentUpon>
+    <Compile Include="Formularios\CreacionIncidencias.Designer.cs">
+      <DependentUpon>CreacionIncidencias.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Form1.cs">
       <SubType>Form</SubType>
@@ -122,8 +122,8 @@
     <EmbeddedResource Include="Formularios\Cargando.resx">
       <DependentUpon>Cargando.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\Creacion_de_Incidencias.resx">
-      <DependentUpon>Creacion_de_Incidencias.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\CreacionIncidencias.resx">
+      <DependentUpon>CreacionIncidencias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

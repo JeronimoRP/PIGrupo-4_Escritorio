@@ -43,19 +43,19 @@ namespace ejemplo_api.Formularios
             //incidencias_Subtipo = await Controlador_Incidencias_Subtipos.GetIncidenciaSubtipo(Convert.ToString(incidencia.subtipo_id));
             Personal personalCreador = new Personal();
             personalCreador = await Controlador_Personal.GetPersonal(Convert.ToString(incidencia.personal1.id));
-            Equipo equipo = await Controlador_Equipo.Getequipo(Convert.ToString(incidencia.equipo_id));
+            Equipo equipo = await Controlador_Equipo.Getequipo(Convert.ToString(incidencia.equipo));
             Personal personalResponsable = new Personal();
             personalResponsable = await Controlador_Personal.GetPersonal(Convert.ToString(incidencia.personal2.id));
 
             txtId.Text = Convert.ToString(incidencia.num);
-            txtTipo.Text = Convert.ToString(incidencia.tipoIncidencia);
+            txtTipo.Text = Convert.ToString(incidencia.tipo);
             //txtSubtipo.Text = Convert.ToString(incidencia.subtipo_id.sub_subtipo);
-            txtFechaCreacion.Text = Convert.ToString(incidencia.fecha_creacion.ToString());
+            txtFechaCreacion.Text = Convert.ToString(incidencia.fechaCreacion.ToString());
 
-            if (incidencia.fecha_cierre != null)
-                txtFechaCierre.Text = Convert.ToString(incidencia.fecha_cierre.ToString());
+            if (incidencia.fechaCierre != null)
+                txtFechaCierre.Text = Convert.ToString(incidencia.fechaCierre.ToString());
             txtDescripcion.Text = incidencia.descripcion;
-            txtEstado.Text = incidencia.tipoEstado.ToString();
+            txtEstado.Text = incidencia.estado.ToString();
 
             if (incidencia.adjunto_ul != null)
                 txtArchivoUrl.Text = incidencia.adjunto_ul;

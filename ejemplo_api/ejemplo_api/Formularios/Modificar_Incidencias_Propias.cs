@@ -1,6 +1,7 @@
 ﻿using ejemplo_api.Controles;
 using ejemplo_api.Modelos;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ejemplo_api.Formularios
@@ -8,14 +9,17 @@ namespace ejemplo_api.Formularios
     public partial class Modificar_Incidencias_Propias : Form
     {
 
-        
-        public  Incidencias incidencia;
+
+        public Incidencias incidencia;
         private Incidencias incidenciaModificada;
 
         private Controlador_Incidencias controlador_Incidencias;
         private Controlador_Incidencias_Subtipos Controlador_Incidencias_Subtipos;
         private Controlador_Personal Controlador_Personal;
         private Controlador_Equipo Controlador_Equipo;
+
+        private byte[] filebytes;
+        private string extension;
 
         public Modificar_Incidencias_Propias(Incidencias incid)
         {
@@ -32,31 +36,23 @@ namespace ejemplo_api.Formularios
 
         private async void cargardatos()
         {
-            Incidencias_subtipo incidencias_Subtipo = new Incidencias_subtipo();
-            //incidencias_Subtipo = await Controlador_Incidencias_Subtipos.GetIncidenciaSubtipo(Convert.ToString(incidencia.subtipo_id));
-            Personal personalCreador = new Personal();
-            personalCreador = await Controlador_Personal.GetPersonal(Convert.ToString(incidencia.personal1.id));
-            Equipo equipo = await Controlador_Equipo.Getequipo(Convert.ToString(incidencia.equipo_id));
-            Personal personalResponsable = new Personal();
-            personalResponsable = await Controlador_Personal.GetPersonal(Convert.ToString(incidencia.personal2.id));
-
             txtId.Text = Convert.ToString(incidencia.num);
-            cbbTipo.Text = Convert.ToString(incidencia.tipoIncidencia);
-            //cbbSubtipo.Text = Convert.ToString(incidencia.subtipo_id.sub_subtipo);
-            txtFechaCreacion.Text = Convert.ToString(incidencia.fecha_creacion.ToString());
+            cbbTipo.Text = Convert.ToString(incidencia.tipo);
+            txtSubtipo.Text = Convert.ToString(incidencia.incidenciasSubtipo.subSubtipo);
+            txtFechaCreacion.Text = Convert.ToString(incidencia.fechaCreacion.ToString());
 
-            if(incidencia.fecha_cierre!=null)
-                txtFechaCierre.Text = Convert.ToString(incidencia.fecha_cierre.ToString());
+            if (incidencia.fechaCierre != null)
+                txtFechaCierre.Text = Convert.ToString(incidencia.fechaCierre.ToString());
             txtDescripcion.Text = incidencia.descripcion;
-            txtEstado.Text =incidencia.tipoEstado.ToString();
+            txtEstado.Text = incidencia.estado.ToString();
 
-            if(incidencia.adjunto_ul!=null)
+            if (incidencia.adjunto_ul != null)
                 txtArchivoUrl.Text = incidencia.adjunto_ul;
-            txtCreador.Text = personalCreador.apellido1.ToString() + ", " + personalCreador.nombre.ToString();
+            txtCreador.Text = incidencia.personal1.apellido1+ ", " + incidencia.personal1.nombre;
 
-            if(incidencia.personal2!=null)
-                txtResponsable.Text = personalResponsable.apellido1 + ", " + personalResponsable.nombre;
-            //txtEquipo.Text = equipo.etiqueta;
+            if (incidencia.personal2 != null)
+                txtResponsable.Text = incidencia.personal2.apellido1 + ", " + incidencia.personal2.nombre;
+            txtEquipo.Text = incidencia.equipo.etiqueta;
             if (txtEstado.Text.Equals(Estado.Cerrada) || txtEstado.Text.Equals(Estado.Resuelta))
                 txtTiempoDec.Text = incidencia.tiempo_dec.ToString();
             else if (txtEstado.Equals(Estado.Enproceso) || txtEstado.Text.Equals(Estado.Enviada_A_INFORTEC))
@@ -67,58 +63,38 @@ namespace ejemplo_api.Formularios
 
         private async void cargarDatosModificados()
         {
-            //Incidencias_subtipo incidencias_Subtipo = await Controlador_Incidencias_Subtipos.GetIncidenciaSubtipo();
             incidenciaModificada = incidencia;
             Array tipos = Enum.GetValues(typeof(Tipo));
             foreach (Tipo tipo in tipos)
             {
                 if (cbbTipo.Text.Equals(tipo.ToString()))
                 {
-                    incidenciaModificada.tipoIncidencia = tipo;
-                }
-            }
-            Array subtipos = Enum.GetValues(typeof(Subtipo));
-            foreach (Subtipo subtipo in subtipos)
-            {
-                if (cbbSubtipo.Text.Equals(subtipo.ToString()))
-                {
-                    //incidenciaModificada.subtipo_id = subtipo;
+                    incidenciaModificada.tipo = tipo;
                 }
             }
 
             incidenciaModificada.descripcion = txtDescripcion.Text;
             incidenciaModificada.adjunto_ul = txtArchivoUrl.Text;
 
+            
+            incidenciaModificada.archivoBase64 = Convert.ToBase64String(filebytes);
+            incidenciaModificada.extension = extension;
+
 
         }
         private void cargarComboBoxs()
         {
             cbbTipo.Items.Clear();
-            cbbSubtipo.Items.Clear();
-            cbbSubtipo.Enabled = false;
             Array tipos = Enum.GetValues(typeof(Tipo));
             foreach (var tipo in tipos)
             {
                 this.cbbTipo.Items.Add(tipo);
             }
-            Array subtipos = Enum.GetValues(typeof(Subtipo));
-            foreach (var subtipo in subtipos)
-            {
-                this.cbbSubtipo.Items.Add(subtipo);
-            }
         }
 
         private void cbbTipo_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cbbTipo.SelectedItem.Equals(Tipo.Equipos))
-            {
-                cbbSubtipo.Enabled = true;
-            }
-            else
-            {
-                cbbSubtipo.Enabled = false;
-                cbbSubtipo.Text = string.Empty;
-            }
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -147,6 +123,15 @@ namespace ejemplo_api.Formularios
         private void Modificar_Incidencias_Propias_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAdjuntar_Click(object sender, EventArgs e)
+        {
+            if (abrirfile.ShowDialog() == DialogResult.OK)
+            {
+                filebytes = File.ReadAllBytes(this.abrirfile.FileName);
+                extension = Path.GetExtension(this.abrirfile.FileName);
+            }
         }
     }
 }

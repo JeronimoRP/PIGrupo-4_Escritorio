@@ -10,14 +10,26 @@ namespace ejemplo_api.Formularios
     {
         private Controlador_Incidencias controlador_Incidencias;
         private Controlador_Perfiles controlador_Perfiles;
+
         private List<Incidencias> lista_Incidencias;
+
         public Incidencias incidencias;
+        private Perfiles p;
+
+
+        private DateTime dia;
         private int modoAdmin = 0;
+
         public Administrador()
         {
             controlador_Incidencias = new Controlador_Incidencias();
             controlador_Perfiles = new Controlador_Perfiles();
+
+            lista_Incidencias = new List<Incidencias>();
+
             incidencias = new Incidencias();
+            p = new Perfiles();
+
 
             InitializeComponent();
             cargarComboBoxs();
@@ -27,24 +39,18 @@ namespace ejemplo_api.Formularios
         private void cargarComboBoxs()
         {
             cbbTipo.Items.Clear();
-            cbbSubtipo.Items.Clear();
-            cbbSubtipo.Enabled = false;
             cbbEstado.Items.Clear();
             Array tipos = Enum.GetValues(typeof(Tipo));
             foreach (Tipo tipo in tipos)
             {
                 this.cbbTipo.Items.Add(Convert.ToString(tipo));
             }
-            Array subtipos = Enum.GetValues(typeof(Subtipo));
-            foreach (Subtipo subtipo in subtipos)
-            {
-                this.cbbSubtipo.Items.Add(Convert.ToString(subtipo));
-            }
             Array estados = Enum.GetValues(typeof(Estado));
             foreach (Estado estado in estados)
             {
                 this.cbbEstado.Items.Add(Convert.ToString(estado));
             }
+            dia = dtp1.Value;
         }
 
         private async void cargarListaIncidencias()
@@ -56,15 +62,7 @@ namespace ejemplo_api.Formularios
 
         private void cbbTipo_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cbbTipo.SelectedItem.Equals(Convert.ToString(Tipo.Equipos)))
-            {
-                cbbSubtipo.Enabled = true;
-            }
-            else
-            {
-                cbbSubtipo.Enabled = false;
-                cbbSubtipo.Text = string.Empty;
-            }
+
         }
         private void cargarDgv(List<Incidencias> lista)
         {
@@ -77,11 +75,14 @@ namespace ejemplo_api.Formularios
                     row.CreateCells(dvgIncidencias);
                     row.Cells[0].Value = incidencia.num;
                     row.Cells[1].Value = incidencia.personal1.nombre;
-                    row.Cells[2].Value = incidencia.personal2.nombre;
-                    row.Cells[3].Value = incidencia.tipoIncidencia;
-                    row.Cells[4].Value = incidencia.tipoEstado;
-                    row.Cells[5].Value = incidencia.fecha_creacion;
-                    row.Cells[6].Value = incidencia.fecha_cierre;
+                    if (incidencia.personal2 == null)
+                        row.Cells[2].Value = "Sin responsable";
+                    else
+                        row.Cells[2].Value = incidencia.personal2.nombre;
+                    row.Cells[3].Value = incidencia.tipo;
+                    row.Cells[4].Value = incidencia.estado;
+                    row.Cells[5].Value = incidencia.fechaCreacion;
+                    row.Cells[6].Value = incidencia.fechaCierre;
 
                     dvgIncidencias.Rows.Add(row);
 
@@ -100,8 +101,15 @@ namespace ejemplo_api.Formularios
         private async void filtrado()
         {
             List<Incidencias> lista = null;
+            if (dia == dtp1.Value)
+            {
+                lista = await controlador_Incidencias.GetAllIncidenciasPorFiltro(cbbTipo.Text, cbbEstado.Text, "");
+            }
+            else
+            {
+                lista = await controlador_Incidencias.GetAllIncidenciasPorFiltro(cbbTipo.Text, cbbEstado.Text, "", Convert.ToString(Convert.ToDateTime(dtp1.Value)));
+            }
 
-            lista = await controlador_Incidencias.GetAllIncidenciasPorFiltro(cbbTipo.Text, cbbEstado.Text, cbbSubtipo.Text);
 
             if (lista == null)
             {
@@ -123,27 +131,26 @@ namespace ejemplo_api.Formularios
         {
             cargarListaIncidencias();
             cbbEstado.Text = string.Empty;
-            cbbSubtipo.Text = string.Empty;
             cbbTipo.Text = string.Empty;
+            dtp1.Value = dia;
             cargarListaIncidencias();
             modoAdmin--;
         }
 
         private async void btnModificar_Click(object sender, EventArgs e)
         {
-            Incidencias incid = new Incidencias();
             if (dvgIncidencias.SelectedRows.Count == 1)
             {
                 if (modoAdmin == 0)
                 {
-                    incid = await controlador_Incidencias.GetIncidencia(Convert.ToString(dvgIncidencias.CurrentRow.Cells[0].Value));
-                    Modificar_Incidencias_Ajenas mod = new Modificar_Incidencias_Ajenas(incid);
+                    incidencias = await controlador_Incidencias.GetIncidencia(Convert.ToString(dvgIncidencias.CurrentRow.Cells[0].Value));
+                    Modificar_Incidencias_Ajenas mod = new Modificar_Incidencias_Ajenas(incidencias);
                     mod.ShowDialog();
                 }
                 else if (modoAdmin == 1)
                 {
-                    incid = await controlador_Incidencias.GetIncidencia(Convert.ToString(dvgIncidencias.CurrentRow.Cells[0].Value));
-                    Modificar_Incidencias_Propias mod = new Modificar_Incidencias_Propias(incid);
+                    incidencias = await controlador_Incidencias.GetIncidencia(Convert.ToString(dvgIncidencias.CurrentRow.Cells[0].Value));
+                    Modificar_Incidencias_Propias mod = new Modificar_Incidencias_Propias(incidencias);
                     mod.ShowDialog();
                 }
             }
@@ -151,12 +158,13 @@ namespace ejemplo_api.Formularios
 
         private async void btnBorrar_Click(object sender, EventArgs e)
         {
-            Incidencias incidenciaBorrar = await controlador_Incidencias.GetIncidencia(Convert.ToString(dvgIncidencias.CurrentRow.Cells[0]));
+            Incidencias incidenciaBorrar = await controlador_Incidencias.GetIncidencia(Convert.ToString(dvgIncidencias.CurrentRow.Cells[0].Value));
             DialogResult r = MessageBox.Show("¿Estas seguro de borrar esta incidencia?", "Eliminar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (r.Equals(DialogResult.OK))
             {
                 await controlador_Incidencias.DeleteIncidencias(incidenciaBorrar, Convert.ToString(incidenciaBorrar.num));
             }
+            cargarListaIncidencias();
         }
 
         private async void btnInformacion_Click(object sender, EventArgs e)
@@ -172,10 +180,18 @@ namespace ejemplo_api.Formularios
 
         private async void btnMisIncidencias_Click(object sender, EventArgs e)
         {
-            Perfiles p = await controlador_Perfiles.GetPerfil(recogerCredencialesporDominio());
-            List<Incidencias> ListaIncidencia = await controlador_Incidencias.GetAllIncidenciasbyId(Convert.ToString(p.personal_id));
-            cargarDgv(ListaIncidencia);
-            modoAdmin++;
+            p = await controlador_Perfiles.GetPerfil(recogerCredencialesporDominio());
+            if (p == null)
+            {
+                MessageBox.Show("No estas dentro de la base de datos por lo que no posees ninguna incidencia", "Error al recoger incidencias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                List<Incidencias> ListaIncidencia = await controlador_Incidencias.GetAllIncidenciasbyId(Convert.ToString(p.personalId));
+                cargarDgv(ListaIncidencia);
+                modoAdmin++;
+            }
+
         }
 
 
@@ -185,6 +201,19 @@ namespace ejemplo_api.Formularios
             string[] aux = userName.Split('\\');
             string nombreDelUsuario = aux[aux.Length - 1];
             return nombreDelUsuario;
+        }
+
+
+        private async void btnCrear_Click(object sender, EventArgs e)
+        {
+            p = await controlador_Perfiles.GetPerfil(recogerCredencialesporDominio());
+            CreacionIncidencias creacion = new CreacionIncidencias(lista_Incidencias.Count + 1, p);
+            creacion.ShowDialog();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

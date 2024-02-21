@@ -51,11 +51,14 @@
             this.txtTiempoDec = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnResolver = new System.Windows.Forms.Button();
             this.btnComentar = new System.Windows.Forms.Button();
             this.txtEstado = new System.Windows.Forms.TextBox();
-            this.cbbSubtipo = new System.Windows.Forms.ComboBox();
             this.cbbTipo = new System.Windows.Forms.ComboBox();
+            this.btnAdjuntar = new System.Windows.Forms.Button();
+            this.abrirfile = new System.Windows.Forms.OpenFileDialog();
+            this.txtSubtipo = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -89,14 +92,14 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(25, 125);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.Size = new System.Drawing.Size(104, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Subtipo :";
+            this.label3.Text = "Nombre del subtipo :";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 175);
+            this.label4.Location = new System.Drawing.Point(358, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 4;
@@ -105,7 +108,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 225);
+            this.label5.Location = new System.Drawing.Point(358, 75);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(90, 13);
             this.label5.TabIndex = 5;
@@ -114,7 +117,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 275);
+            this.label6.Location = new System.Drawing.Point(23, 225);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 6;
@@ -123,7 +126,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(449, 25);
+            this.label7.Location = new System.Drawing.Point(699, 25);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 7;
@@ -132,7 +135,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(449, 75);
+            this.label8.Location = new System.Drawing.Point(699, 75);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 8;
@@ -141,7 +144,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(449, 125);
+            this.label9.Location = new System.Drawing.Point(358, 125);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 13);
             this.label9.TabIndex = 10;
@@ -150,7 +153,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(449, 175);
+            this.label10.Location = new System.Drawing.Point(358, 175);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 13);
             this.label10.TabIndex = 11;
@@ -159,7 +162,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(449, 225);
+            this.label11.Location = new System.Drawing.Point(699, 125);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 12;
@@ -168,7 +171,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(449, 275);
+            this.label12.Location = new System.Drawing.Point(699, 175);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 13);
             this.label12.TabIndex = 13;
@@ -176,7 +179,7 @@
             // 
             // txtFechaCreacion
             // 
-            this.txtFechaCreacion.Location = new System.Drawing.Point(136, 175);
+            this.txtFechaCreacion.Location = new System.Drawing.Point(469, 25);
             this.txtFechaCreacion.Name = "txtFechaCreacion";
             this.txtFechaCreacion.ReadOnly = true;
             this.txtFechaCreacion.Size = new System.Drawing.Size(195, 20);
@@ -184,7 +187,7 @@
             // 
             // txtFechaCierre
             // 
-            this.txtFechaCierre.Location = new System.Drawing.Point(136, 222);
+            this.txtFechaCierre.Location = new System.Drawing.Point(469, 72);
             this.txtFechaCierre.Name = "txtFechaCierre";
             this.txtFechaCierre.ReadOnly = true;
             this.txtFechaCierre.Size = new System.Drawing.Size(195, 20);
@@ -192,7 +195,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(105, 272);
+            this.txtDescripcion.Location = new System.Drawing.Point(99, 227);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(338, 157);
@@ -200,14 +203,14 @@
             // 
             // txtArchivoUrl
             // 
-            this.txtArchivoUrl.Location = new System.Drawing.Point(535, 72);
+            this.txtArchivoUrl.Location = new System.Drawing.Point(785, 72);
             this.txtArchivoUrl.Name = "txtArchivoUrl";
-            this.txtArchivoUrl.Size = new System.Drawing.Size(195, 20);
+            this.txtArchivoUrl.Size = new System.Drawing.Size(138, 20);
             this.txtArchivoUrl.TabIndex = 20;
             // 
             // txtCreador
             // 
-            this.txtCreador.Location = new System.Drawing.Point(535, 122);
+            this.txtCreador.Location = new System.Drawing.Point(469, 122);
             this.txtCreador.Name = "txtCreador";
             this.txtCreador.ReadOnly = true;
             this.txtCreador.Size = new System.Drawing.Size(195, 20);
@@ -215,7 +218,7 @@
             // 
             // txtResponsable
             // 
-            this.txtResponsable.Location = new System.Drawing.Point(535, 172);
+            this.txtResponsable.Location = new System.Drawing.Point(469, 172);
             this.txtResponsable.Name = "txtResponsable";
             this.txtResponsable.ReadOnly = true;
             this.txtResponsable.Size = new System.Drawing.Size(195, 20);
@@ -223,7 +226,7 @@
             // 
             // txtEquipo
             // 
-            this.txtEquipo.Location = new System.Drawing.Point(535, 222);
+            this.txtEquipo.Location = new System.Drawing.Point(785, 122);
             this.txtEquipo.Name = "txtEquipo";
             this.txtEquipo.ReadOnly = true;
             this.txtEquipo.Size = new System.Drawing.Size(195, 20);
@@ -231,7 +234,7 @@
             // 
             // txtTiempoDec
             // 
-            this.txtTiempoDec.Location = new System.Drawing.Point(535, 272);
+            this.txtTiempoDec.Location = new System.Drawing.Point(785, 172);
             this.txtTiempoDec.Name = "txtTiempoDec";
             this.txtTiempoDec.ReadOnly = true;
             this.txtTiempoDec.Size = new System.Drawing.Size(195, 20);
@@ -239,9 +242,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(535, 378);
+            this.btnGuardar.Location = new System.Drawing.Point(566, 313);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(119, 47);
             this.btnGuardar.TabIndex = 26;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -249,47 +252,30 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(655, 378);
+            this.btnCancelar.Location = new System.Drawing.Point(756, 313);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(119, 47);
             this.btnCancelar.TabIndex = 27;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // btnResolver
-            // 
-            this.btnResolver.Location = new System.Drawing.Point(655, 324);
-            this.btnResolver.Name = "btnResolver";
-            this.btnResolver.Size = new System.Drawing.Size(75, 23);
-            this.btnResolver.TabIndex = 28;
-            this.btnResolver.Text = "Resolver";
-            this.btnResolver.UseVisualStyleBackColor = true;
-            // 
             // btnComentar
             // 
-            this.btnComentar.Location = new System.Drawing.Point(535, 324);
+            this.btnComentar.Location = new System.Drawing.Point(566, 240);
             this.btnComentar.Name = "btnComentar";
-            this.btnComentar.Size = new System.Drawing.Size(75, 23);
+            this.btnComentar.Size = new System.Drawing.Size(119, 47);
             this.btnComentar.TabIndex = 29;
             this.btnComentar.Text = "Comentar";
             this.btnComentar.UseVisualStyleBackColor = true;
             // 
             // txtEstado
             // 
-            this.txtEstado.Location = new System.Drawing.Point(535, 22);
+            this.txtEstado.Location = new System.Drawing.Point(785, 22);
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.ReadOnly = true;
             this.txtEstado.Size = new System.Drawing.Size(195, 20);
             this.txtEstado.TabIndex = 32;
-            // 
-            // cbbSubtipo
-            // 
-            this.cbbSubtipo.FormattingEnabled = true;
-            this.cbbSubtipo.Location = new System.Drawing.Point(136, 121);
-            this.cbbSubtipo.Name = "cbbSubtipo";
-            this.cbbSubtipo.Size = new System.Drawing.Size(195, 21);
-            this.cbbSubtipo.TabIndex = 31;
             // 
             // cbbTipo
             // 
@@ -298,18 +284,60 @@
             this.cbbTipo.Name = "cbbTipo";
             this.cbbTipo.Size = new System.Drawing.Size(195, 21);
             this.cbbTipo.TabIndex = 30;
-            this.cbbTipo.SelectedValueChanged += new System.EventHandler(this.cbbTipo_SelectedValueChanged);
+            // 
+            // btnAdjuntar
+            // 
+            this.btnAdjuntar.Location = new System.Drawing.Point(950, 70);
+            this.btnAdjuntar.Name = "btnAdjuntar";
+            this.btnAdjuntar.Size = new System.Drawing.Size(75, 23);
+            this.btnAdjuntar.TabIndex = 33;
+            this.btnAdjuntar.Text = "Adjuntar";
+            this.btnAdjuntar.UseVisualStyleBackColor = true;
+            this.btnAdjuntar.Click += new System.EventHandler(this.btnAdjuntar_Click);
+            // 
+            // abrirfile
+            // 
+            this.abrirfile.FileName = "openFileDialog1";
+            this.abrirfile.Filter = "Documentos de Excel|*.xls;*.xlsx|Documentos de Word|*.doc;*.docx|Archivos PDF|*.p" +
+    "df|Archivos JPG|*.jpg";
+            // 
+            // txtSubtipo
+            // 
+            this.txtSubtipo.Location = new System.Drawing.Point(136, 122);
+            this.txtSubtipo.Name = "txtSubtipo";
+            this.txtSubtipo.ReadOnly = true;
+            this.txtSubtipo.Size = new System.Drawing.Size(195, 20);
+            this.txtSubtipo.TabIndex = 34;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(136, 172);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(195, 20);
+            this.textBox1.TabIndex = 36;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(25, 175);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(104, 13);
+            this.label13.TabIndex = 35;
+            this.label13.Text = "Nombre del subtipo :";
             // 
             // Modificar_Incidencias_Propias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1071, 416);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtSubtipo);
+            this.Controls.Add(this.btnAdjuntar);
             this.Controls.Add(this.txtEstado);
-            this.Controls.Add(this.cbbSubtipo);
             this.Controls.Add(this.cbbTipo);
             this.Controls.Add(this.btnComentar);
-            this.Controls.Add(this.btnResolver);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.txtTiempoDec);
@@ -365,10 +393,13 @@
         public System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnResolver;
         private System.Windows.Forms.Button btnComentar;
         private System.Windows.Forms.TextBox txtEstado;
-        private System.Windows.Forms.ComboBox cbbSubtipo;
         private System.Windows.Forms.ComboBox cbbTipo;
+        private System.Windows.Forms.Button btnAdjuntar;
+        private System.Windows.Forms.OpenFileDialog abrirfile;
+        private System.Windows.Forms.TextBox txtSubtipo;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label13;
     }
 }

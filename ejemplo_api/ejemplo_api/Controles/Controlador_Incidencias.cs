@@ -19,11 +19,25 @@ namespace ejemplo_api.Controles
         }
         public async Task<List<Incidencias>> GetAllIncidencias()
         {
+            
+                List<Incidencias> lista_Incidencias = new List<Incidencias>();
+                HttpResponseMessage response = await
+                    cliente.GetAsync("http://localhost:8080/ap/incidencias");
+                response.EnsureSuccessStatusCode();
+                string responseJson = await
+                    response.Content.ReadAsStringAsync();
+
+                lista_Incidencias = JsonConvert.DeserializeObject<List<Incidencias>>(responseJson);
+                return lista_Incidencias;
+            
+        }
+        public async Task<List<Incidencias>> GetAllIncidenciasbyId(string id)
+        {
             try
             {
                 List<Incidencias> lista_Incidencias = new List<Incidencias>();
                 HttpResponseMessage response = await
-                    cliente.GetAsync("http://localhost:8080/ap/incidencias");
+                    cliente.GetAsync("http://localhost:8080/ap/creador/"+id);
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();
@@ -36,13 +50,13 @@ namespace ejemplo_api.Controles
                 return null;
             }
         }
-        public async Task<List<Incidencias>> GetAllIncidenciasbyId(string id)
+        public async Task<List<Incidencias>> GetAllSubSubtipos(string nombre)
         {
             try
             {
                 List<Incidencias> lista_Incidencias = new List<Incidencias>();
                 HttpResponseMessage response = await
-                    cliente.GetAsync("http://localhost:8080/ap/incidencias/"+id);
+                    cliente.GetAsync("http://localhost:8080/ap/subtipo/nombre/" + nombre);
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();
@@ -65,7 +79,7 @@ namespace ejemplo_api.Controles
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();
-
+                MessageBox.Show(responseJson);
                 Incidencias = JsonConvert.DeserializeObject<Incidencias>(responseJson);
                 return Incidencias;
             }
@@ -81,6 +95,25 @@ namespace ejemplo_api.Controles
                 List<Incidencias> lista_Incidencias = new List<Incidencias>();
                 HttpResponseMessage response = await
                     cliente.GetAsync("http://localhost:8080/ap/filtro?tipo="+tipo+"&estado="+estado+"&subtipoNombre="+subtipo);
+                response.EnsureSuccessStatusCode();
+                string responseJson = await
+                    response.Content.ReadAsStringAsync();
+
+                lista_Incidencias = JsonConvert.DeserializeObject<List<Incidencias>>(responseJson);
+                return lista_Incidencias;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task<List<Incidencias>> GetAllIncidenciasPorFiltro(string tipo, string estado, string subtipo, string fechaCreacion)
+        {
+            try
+            {
+                List<Incidencias> lista_Incidencias = new List<Incidencias>();
+                HttpResponseMessage response = await
+                    cliente.GetAsync("http://localhost:8080/ap/filtro?tipo=" + tipo + "&estado=" + estado + "&subtipoNombre=" + subtipo + "&fechaCreacion=" + fechaCreacion);
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();

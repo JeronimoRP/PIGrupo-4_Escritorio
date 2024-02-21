@@ -22,11 +22,11 @@ namespace ejemplo_api.Formularios
         private Controlador_Personal controlador_Personal;
         private Controlador_Equipo controlador_Equipo;
         private Controlador_Perfiles controlador_Perfiles;
-        public Modificar_Incidencias_Ajenas(Incidencias incid)
+        public Modificar_Incidencias_Ajenas(Incidencias incidencias)
         {
             InitializeComponent();
             incidencia = new Incidencias();
-            this.incidencia = incid;
+            this.incidencia = incidencias;
             controlador_Incidencias_Subtipos = new Controlador_Incidencias_Subtipos();
             controlador_Personal = new Controlador_Personal();
             controlador_Equipo = new Controlador_Equipo();
@@ -39,34 +39,27 @@ namespace ejemplo_api.Formularios
 
         private async void cargardatos()
         {
-            Incidencias_subtipo incidencias_Subtipo = new Incidencias_subtipo();
-            //incidencias_Subtipo = await Controlador_Incidencias_Subtipos.GetIncidenciaSubtipo(Convert.ToString(incidencia.subtipo_id));
-            Personal personalCreador = new Personal();
-            personalCreador = await controlador_Personal.GetPersonal(Convert.ToString(incidencia.personal1.id));
-            Equipo equipo = await controlador_Equipo.Getequipo(Convert.ToString(incidencia.equipo_id));
-            Personal personalResponsable = new Personal();
-            personalResponsable = await controlador_Personal.GetPersonal(Convert.ToString(incidencia.personal2.id));
-
             txtId.Text = Convert.ToString(incidencia.num);
-            cbbEstado.Text = Convert.ToString(incidencia.tipoEstado);
-            //cbbSubtipo.Text = Convert.ToString(incidencia.subtipo_id.sub_subtipo);
-            txtFechaCreacion.Text = Convert.ToString(incidencia.fecha_creacion.ToString());
+            cbbEstado.Text = Convert.ToString(incidencia.estado);
+            txtsubtipo.Text = Convert.ToString(incidencia.incidenciasSubtipo.subSubtipo);
+            txtFechaCreacion.Text = Convert.ToString(incidencia.fechaCreacion.ToString());
+            txtEquipo.Text = incidencia.equipo.etiqueta;
 
-            if (incidencia.fecha_cierre != null)
-                txtFechaCierre.Text = Convert.ToString(incidencia.fecha_cierre.ToString());
+            if (incidencia.fechaCierre != null)
+                txtFechaCierre.Text = Convert.ToString(incidencia.fechaCierre.ToString());
             txtDescripcion.Text = incidencia.descripcion;
-            txtEstado.Text = incidencia.tipoEstado.ToString();
+
 
             if (incidencia.adjunto_ul != null)
                 txtArchivoUrl.Text = incidencia.adjunto_ul;
-            txtCreador.Text = personalCreador.apellido1.ToString() + ", " + personalCreador.nombre.ToString();
+            txtCreador.Text = incidencia.personal1.apellido1 + ", " + incidencia.personal1.nombre;
 
             if (incidencia.personal2 != null)
-                txtResponsable.Text = personalResponsable.apellido1 + ", " + personalResponsable.nombre;
+                txtResponsable.Text = incidencia.personal2.apellido1 + ", " + incidencia.personal2.nombre;
             //txtEquipo.Text = equipo.etiqueta;
-            if (txtEstado.Text.Equals(Estado.Cerrada) || txtEstado.Text.Equals(Estado.Resuelta))
+            if (txtsubtipo.Text.Equals(Estado.Cerrada) || txtsubtipo.Text.Equals(Estado.Resuelta))
                 txtTiempoDec.Text = incidencia.tiempo_dec.ToString();
-            else if (txtEstado.Equals(Estado.Enproceso) || txtEstado.Text.Equals(Estado.Enviada_A_INFORTEC))
+            else if (txtsubtipo.Equals(Estado.Enproceso) || txtsubtipo.Text.Equals(Estado.Enviada_A_INFORTEC))
                 txtTiempoDec.Text = "En proceso";
             else
                 txtTiempoDec.Text = "En espera";
@@ -80,13 +73,13 @@ namespace ejemplo_api.Formularios
             {
                 if (cbbEstado.Text.Equals(estado.ToString()))
                 {
-                    incidenciaModificada.tipoEstado = estado;
+                    incidenciaModificada.estado = estado;
                 }
             }
             Perfiles per = new Perfiles();
             per = await controlador_Perfiles.GetPerfil(txtResponsable.Text);
 
-            incidenciaModificada.personal2.id = per.personal_id;
+            incidenciaModificada.personal2.id = per.personalId;
 
 
         }
@@ -94,9 +87,8 @@ namespace ejemplo_api.Formularios
         private void cargarComboBoxs()
         {
             cbbEstado.Items.Clear();
-            cbbEstado.Enabled = false;
             Array estados = Enum.GetValues(typeof(Estado));
-            foreach (var estado in estados)
+            foreach (Estado estado in estados)
             {
                 this.cbbEstado.Items.Add(estado);
             }

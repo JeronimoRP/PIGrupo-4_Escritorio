@@ -22,17 +22,19 @@ namespace ejemplo_api.Modelos
     public class Incidencias
     {
         public int num { get; set; }
-        public Tipo tipoIncidencia { get; set; }
-        public Incidencias_subtipo subtipo_id { get; set; }
-        public DateTime fecha_creacion { get; set; }
-        public DateTime fecha_cierre { get; set; }
-        public string descripcion { get; set; }
-        public Estado tipoEstado { get; set; }
         public string adjunto_ul { get; set; }
+        public string descripcion { get; set; }
+        public Estado estado { get; set; }
+        public DateTime fechaCreacion { get; set; }
+        public DateTime fechaCierre { get; set; }
+        public Tipo tipo { get; set; }
+        public DateTime tiempo_dec { get; set; }
+        public Equipo equipo { get; set; }
+        public Incidencias_subtipo incidenciasSubtipo { get; set; }
         public Personal personal1 { get; set; }
         public Personal personal2 { get; set; }
-        public Equipo equipo_id { get; set; }
-        public DateTime tiempo_dec { get; set; }
 
+        public string archivoBase64 { get; set; }
+        public string extension { get; set; }
     }
 }

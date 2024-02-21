@@ -35,13 +35,32 @@ namespace ejemplo_api.Controles
                 return null;
             }
         }
-        public async Task<Equipo> Getequipo(string id)
+        public async Task<Equipo> GetEquipo(string id)
         {
             try
             {
                 Equipo equipo = new Equipo();
                 HttpResponseMessage response = await
                     cliente.GetAsync("http://localhost:8080/eq/" + id);
+                response.EnsureSuccessStatusCode();
+                string responseJson = await
+                    response.Content.ReadAsStringAsync();
+
+                equipo = JsonConvert.DeserializeObject<Equipo>(responseJson);
+                return equipo;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public async Task<Equipo> GetEquipoPorEtiqueta(string etiqueta)
+        {
+            try
+            {
+                Equipo equipo = new Equipo();
+                HttpResponseMessage response = await
+                    cliente.GetAsync("http://localhost:8080/eq/" + etiqueta);
                 response.EnsureSuccessStatusCode();
                 string responseJson = await
                     response.Content.ReadAsStringAsync();
