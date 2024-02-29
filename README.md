@@ -441,6 +441,9 @@ Utiliza un rcycleview con un adaptador y Hoder personalizado con imagecard para 
 
 Se añade o se edita una incidencia enviando hacia la api los datos de la nueva incidencia y actualizando las listas de las que las recycle view utilizan en el caso 
 
+## PSP
+
+5.4 Se encriptó el contenido del los archivos adjuntos que poseían las incidencias y los comentarios a base 64, y se implemento un método de seguridad para hacer más seguro el logueo de la aplicación. Este método de logueo recoge el dominio del usuario actual, llama un método que recogerá el perfil del usuario del dominio que se ha recogido y dependiendo de que devuelva este método: saldra un mensaje de error al que no esté en la base de datos, se iniciara la aplicacion con la interfaz del profesor o se iniciara la aplicación con la interfaz del administrador.
 
 # Tecnologías Utilizadas en el Proyecto
 
@@ -470,6 +473,4 @@ Visual Studio es un entorno de desarrollo integrado (IDE) desarrollado por Micro
 
 Android Studio es un entorno de desarrollo integrado (IDE) creado por Google para facilitar y potenciar el desarrollo de aplicaciones móviles en la plataforma Android. Con un enfoque centrado en la eficiencia y la productividad, Android Studio ofrece una serie de características y funcionalidades esenciales para los desarrolladores de Android.
 
-### [PSP]
 
-5.4 Se encriptó el contenido del los archivos adjuntos que poseían las incidencias y los comentarios a base 64, y se implemento un método de seguridad para hacer más seguro el logueo de la aplicación. Este método de logueo recoge el dominio del usuario actual, llama un método que recogerá el perfil del usuario del dominio que se ha recogido y dependiendo de que devuelva este método: saldra un mensaje de error al que no esté en la base de datos, se iniciara la aplicacion con la interfaz del profesor o se iniciara la aplicación con la interfaz del administrador.
