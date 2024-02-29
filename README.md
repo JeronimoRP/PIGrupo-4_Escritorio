@@ -442,7 +442,7 @@ Utiliza un rcycleview con un adaptador y Hoder personalizado con imagecard para 
 Se añade o se edita una incidencia enviando hacia la api los datos de la nueva incidencia y actualizando las listas de las que las recycle view utilizan en el caso 
 
 
-**Informe sobre la Implementación de PSP (Perfil de Usuario) en la Aplicación:**
+##Informe sobre la Implementación de PSP (Perfil de Usuario) en la Aplicación:
 
 **1. Introducción:**
 La implementación del Perfil de Usuario (PSP) en la aplicación se ha llevado a cabo con el objetivo de personalizar la experiencia del usuario y garantizar la seguridad de la información. En este informe, se detallan los pasos realizados en las etapas 5.4, 5.5 y 5.6 del desarrollo.
