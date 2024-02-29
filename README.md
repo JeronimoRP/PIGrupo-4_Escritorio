@@ -441,9 +441,33 @@ Utiliza un rcycleview con un adaptador y Hoder personalizado con imagecard para 
 
 Se añade o se edita una incidencia enviando hacia la api los datos de la nueva incidencia y actualizando las listas de las que las recycle view utilizan en el caso 
 
-## PSP
 
-5.4 Se encriptó el contenido del los archivos adjuntos que poseían las incidencias y los comentarios a base 64, y se implemento un método de seguridad para hacer más seguro el logueo de la aplicación. Este método de logueo recoge el dominio del usuario actual, llama un método que recogerá el perfil del usuario del dominio que se ha recogido y dependiendo de que devuelva este método: saldra un mensaje de error al que no esté en la base de datos, se iniciara la aplicacion con la interfaz del profesor o se iniciara la aplicación con la interfaz del administrador.
+**Informe sobre la Implementación de PSP (Perfil de Usuario) en la Aplicación:**
+
+**1. Introducción:**
+La implementación del Perfil de Usuario (PSP) en la aplicación se ha llevado a cabo con el objetivo de personalizar la experiencia del usuario y garantizar la seguridad de la información. En este informe, se detallan los pasos realizados en las etapas 5.4, 5.5 y 5.6 del desarrollo.
+
+**2. Verificación del Tipo de Perfil del Usuario (Etapa 5.4):**
+Se realizó una verificación en la base de datos para determinar el tipo de perfil que posee cada usuario al iniciar sesión. Esta fase es crucial para asegurar que el acceso a la aplicación se ajuste a las necesidades y privilegios específicos de cada usuario. Se implementaron tres posibles escenarios:
+   
+   - **Mensaje de Error para Usuarios No Registrados:**
+     Si el usuario no se encuentra en la base de datos, se activa un mensaje de error indicando la falta de registro. Esto garantiza que solo usuarios autorizados tengan acceso.
+
+   - **Interfaz del Profesor:**
+     Si el perfil del usuario corresponde al de un profesor, la aplicación se inicia con la interfaz diseñada para este grupo de usuarios. Esto facilita una experiencia adaptada a las funciones y responsabilidades del profesor.
+
+   - **Interfaz del Administrador:**
+     Para los usuarios con perfil de administrador, la aplicación se inicia con una interfaz específica que proporciona acceso a funciones administrativas y controles avanzados.
+
+**3. Encriptación de Archivos Adjuntos (Etapa 5.5):**
+Se implementó un método de seguridad robusto mediante la encriptación de archivos adjuntos que contienen incidencias y comentarios. Estos archivos se codificaron en formato base 64 para asegurar la confidencialidad y la integridad de la información. Esta medida refuerza la protección contra accesos no autorizados y garantiza que la información sensible permanezca segura durante la transmisión y el almacenamiento.
+
+**4. Recolección de Perfil de Usuario mediante el Dominio (Etapa 5.6):**
+La aplicación recopila el perfil del usuario identificando el dominio desde el cual se ha iniciado sesión. Esta información se utiliza para personalizar la experiencia del usuario según sus atributos y roles asociados con el dominio específico. La recolección del perfil a través del dominio simplifica el proceso y garantiza una adaptación precisa a las necesidades del usuario.
+
+**5. Conclusiones:**
+La implementación exitosa de estas etapas fortalece la seguridad, personalización y eficiencia de la aplicación. La combinación de verificación de perfil, encriptación de archivos y recolección de datos basada en dominio crea un entorno robusto y adaptativo para los usuarios, asegurando un acceso seguro y una experiencia óptima.
+
 
 # Tecnologías Utilizadas en el Proyecto
 
