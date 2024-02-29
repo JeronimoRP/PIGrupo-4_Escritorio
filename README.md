@@ -458,7 +458,7 @@ Se realizó una verificación en la base de datos para determinar el tipo de per
 
    - **Interfaz del Administrador:**
      Para los usuarios con perfil de administrador, la aplicación se inicia con una interfaz específica que proporciona acceso a funciones administrativas y controles avanzados.
-
+  
 **3. Encriptación de Archivos Adjuntos (Etapa 5.5):**
 Se implementó un método de seguridad robusto mediante la encriptación de archivos adjuntos que contienen incidencias y comentarios. Estos archivos se codificaron en formato base 64 para asegurar la confidencialidad y la integridad de la información. Esta medida refuerza la protección contra accesos no autorizados y garantiza que la información sensible permanezca segura durante la transmisión y el almacenamiento.
 
