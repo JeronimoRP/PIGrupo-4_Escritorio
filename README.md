@@ -476,6 +476,7 @@ La implementación exitosa de estas etapas fortalece la seguridad, personalizaci
 **Generación del Salt:**
 Se utiliza el método generarSalt() para generar un salt aleatorio, una cadena única y aleatoria. Este valor se concatenará a la contraseña antes de realizar el hash, proporcionando un nivel adicional de seguridad.
 
+``` py
 java
 Copy code
 private String generarSalt() {
@@ -484,6 +485,7 @@ private String generarSalt() {
     random.nextBytes(saltBytes);
     return bytesToHex(saltBytes);
 }
+```
 
 **Encriptación de la Contraseña:**
 
@@ -493,6 +495,8 @@ La contraseña original se combina con el salt generado utilizando la variable c
 Uso del Algoritmo de Hash SHA-256:
 
 Se utiliza el algoritmo de hash SHA-256 para calcular el hash de la contraseña concatenada. Este proceso asegura que la contraseña no se almacene en texto plano, agregando una capa adicional de seguridad.
+
+``` py
 java
 Copy code
 private String encriptarContrasena(String contrasena, String salt) {
@@ -507,9 +511,12 @@ private String encriptarContrasena(String contrasena, String salt) {
         return null;
     }
 }
+
+```
 Conversión de Bytes a Hexadecimal:
 El resultado del hash se convierte a una representación hexadecimal mediante el método bytesToHex().
 
+``` py
 java
 Copy code
 private String bytesToHex(byte[] bytes) {
@@ -519,7 +526,7 @@ private String bytesToHex(byte[] bytes) {
     }
     return hexString.toString();
 }
-
+```
 
 
 # Tecnologías Utilizadas en el Proyecto
