@@ -444,6 +444,8 @@ Se añade o se edita una incidencia enviando hacia la api los datos de la nueva 
 
 ## Informe sobre la Implementación de PSP (Perfil de Usuario) en la Aplicación:
 
+### Escritorio
+
 **1. Introducción:**
 La implementación del Perfil de Usuario (PSP) en la aplicación se ha llevado a cabo con el objetivo de personalizar la experiencia del usuario y garantizar la seguridad de la información. En este informe, se detallan los pasos realizados en las etapas 5.4, 5.5 y 5.6 del desarrollo.
 
@@ -467,6 +469,57 @@ La aplicación recopila el perfil del usuario identificando el dominio desde el 
 
 **5. Conclusiones:**
 La implementación exitosa de estas etapas fortalece la seguridad, personalización y eficiencia de la aplicación. La combinación de verificación de perfil, encriptación de archivos y recolección de datos basada en dominio crea un entorno robusto y adaptativo para los usuarios, asegurando un acceso seguro y una experiencia óptima.
+
+### API
+
+**Generación del Salt y Encriptación de Contraseñas:**
+**Generación del Salt:**
+Se utiliza el método generarSalt() para generar un salt aleatorio, una cadena única y aleatoria. Este valor se concatenará a la contraseña antes de realizar el hash, proporcionando un nivel adicional de seguridad.
+
+java
+Copy code
+private String generarSalt() {
+    SecureRandom random = new SecureRandom();
+    byte[] saltBytes = new byte[16];
+    random.nextBytes(saltBytes);
+    return bytesToHex(saltBytes);
+}
+
+**Encriptación de la Contraseña:**
+
+**Concatenación de Salt y Contraseña:**
+
+La contraseña original se combina con el salt generado utilizando la variable contrasenaConSalt.
+Uso del Algoritmo de Hash SHA-256:
+
+Se utiliza el algoritmo de hash SHA-256 para calcular el hash de la contraseña concatenada. Este proceso asegura que la contraseña no se almacene en texto plano, agregando una capa adicional de seguridad.
+java
+Copy code
+private String encriptarContrasena(String contrasena, String salt) {
+    String contrasenaConSalt = salt + contrasena;
+    try {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] hashBytes = messageDigest.digest(contrasenaConSalt.getBytes());
+        return bytesToHex(hashBytes);
+    } catch (NoSuchAlgorithmException e) {
+        // Manejar la excepción de manera adecuada (puede lanzar una excepción personalizada o registrar el error)
+        e.printStackTrace();
+        return null;
+    }
+}
+Conversión de Bytes a Hexadecimal:
+El resultado del hash se convierte a una representación hexadecimal mediante el método bytesToHex().
+
+java
+Copy code
+private String bytesToHex(byte[] bytes) {
+    StringBuilder hexString = new StringBuilder();
+    for (byte b : bytes) {
+        hexString.append(String.format("%02x", b));
+    }
+    return hexString.toString();
+}
+
 
 
 # Tecnologías Utilizadas en el Proyecto
